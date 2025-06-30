@@ -108,5 +108,14 @@ class Employee:
                 hour_rate = int(row["hour_rate"])
                 cls(name, age, job, id, phone, bank_account, hours_worked, hour_rate)
 
-Employee.read_csv_data("employees_data_enhanced.csv")
-print(Employee[0])
+
+class finance:
+    TAX_lalaalla = 5000
+
+    @staticmethod
+    def calc_tax(salary):
+        if salary < 30000:
+            return salary * 0.1 
+        else:
+            return salary * 0.3
+    print(calc_tax)
