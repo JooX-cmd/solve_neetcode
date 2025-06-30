@@ -15,7 +15,7 @@ class Employee:
         self.hour_rate = hour_rate
         Employee.all_employee.append(self)
 
-    @property
+    @property  # why  i make property  for  privite attrubute  and for  change value   and validation
     def hours_worked(self):
         return self.__hours_worked
 
@@ -30,7 +30,7 @@ class Employee:
     def phone(self):
         return self.__phone
 
-    @phone.setter
+    @phone.setter # just for check valid phone or not ? 
     def phone(self, new_phone):
         if Employee.is_valid_phone(new_phone):
             self.__phone = new_phone
@@ -43,10 +43,10 @@ class Employee:
 
     @id.setter
     def id(self, value):
-        if isinstance(value, str) and value.isdigit() and value.strip():
+        if isinstance(value, str) and value.isdigit() and value.strip(): # here  i make this to check 3 thinks 1 string   , number  , not empty 
             self.__id = value
         else:
-            raise ValueError("ID should be non-empty string composed only of digits")
+            raise ValueError("ID should be non-empty string composed only of digits")  # raise for  error or    follow the conditon    
 
     def calc_gross_salary(self):
         return self.__hours_worked * self.hour_rate
@@ -54,9 +54,9 @@ class Employee:
     def update_work_detalis(self, new_hours, new_rate):
         self.hours_worked  = new_hours
         self.hour_rate = new_rate
-
+# privite method 
     def __calc_monthly_deduction(self, salary):
-        tax = Employee.calc_tax(salary)
+        tax = Employee.calc_tax(salary) ## call another method   how  classname + function name  
         health_insurance = 100
         retirement_contribution = 0.05 * salary
         total_deduction = tax + health_insurance + retirement_contribution
@@ -79,6 +79,10 @@ class Employee:
 
     def __repr__(self):
         return f"Employee name = {self.name}, age = {self.age}, job = {self.job}"
+    
+    def __dir__(self):
+        pass
+
 
 
 
@@ -93,29 +97,41 @@ class Employee:
         else:
             return salary * 0.3
 
-    @classmethod
-    def read_csv_data(cls, file_name):
-        with open(file_name, 'r') as file:
-            csv_reader = csv.DictReader(file)
-            for row in csv_reader:
-                name = row["name"]
-                age = int(row["age"])
-                job = row["job_title"]
-                id = row["id"]
-                phone = row["phone"]
-                bank_account = row["bank_account"]
-                hours_worked = int(row["hours_worked"])
-                hour_rate = int(row["hour_rate"])
-                cls(name, age, job, id, phone, bank_account, hours_worked, hour_rate)
 
 
-class finance:
-    TAX_lalaalla = 5000
 
-    @staticmethod
-    def calc_tax(salary):
-        if salary < 30000:
-            return salary * 0.1 
-        else:
-            return salary * 0.3
-    print(calc_tax)
+    # @classmethod
+    # def read_csv_data(cls, file_name):
+    #     with open(file_name, 'r') as file:
+    #         csv_reader = csv.DictReader(file)
+    #         for row in csv_reader:
+    #             name = row["name"]
+    #             age = int(row["age"])
+    #             job = row["job_title"]
+    #             id = row["id"]
+    #             phone = row["phone"]
+    #             bank_account = row["bank_account"]
+    #             hours_worked = int(row["hours_worked"])
+    #             hour_rate = int(row["hour_rate"])
+    #             cls(name, age, job, id, phone, bank_account, hours_worked, hour_rate)
+
+
+
+
+
+
+
+# this part i must desine befor i start code   now let's make method  in other  class for every function 
+
+class py :
+    def lalala():
+        pass
+
+
+
+
+
+
+
+    def mother_fucker ():
+        ...
