@@ -90,12 +90,6 @@ class Employee:
     def is_valid_phone(phone):
         return phone.startswith("+20") and len(phone) == 12
 
-    @staticmethod
-    def calc_tax(salary):
-        if salary < 30000:
-            return salary * 0.1
-        else:
-            return salary * 0.3
 
 
 
@@ -123,15 +117,15 @@ class Employee:
 
 # this part i must desine befor i start code   now let's make method  in other  class for every function 
 
-class py :
-    def lalala():
-        pass
 
-
-
-
-
-
-
-    def mother_fucker ():
-        ...
+class finace:  # الماليات 
+    
+    TAX_THRESHOLD = 10000
+    TAX_LOW = 0.1
+    TAX_HIGH = 0.3
+    @staticmethod
+    def calc_tax(salary):
+        if salary < finace.TAX_THRESHOLD :
+            return salary * finace.TAX_LOW   #.> make it varable
+        else:
+            return salary * finace.TAX_HIGH
