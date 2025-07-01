@@ -51,22 +51,15 @@ class Employee:
     def calc_gross_salary(self):
         return self.__hours_worked * self.hour_rate
     
+    def calc_net_salary(self):
+        gross_salary = self.calc_gross_salary
+        return finace.calc_net_salary(gross_salary)
+    
     def update_work_detalis(self, new_hours, new_rate):
         self.hours_worked  = new_hours
         self.hour_rate = new_rate
 # privite method 
-    def __calc_monthly_deduction(self, salary):
-        tax = Employee.calc_tax(salary) ## call another method   how  classname + function name  
-        health_insurance = 100
-        retirement_contribution = 0.05 * salary
-        total_deduction = tax + health_insurance + retirement_contribution
-        return total_deduction
 
-    def calc_net_salary(self):
-        gross_salary = self.calc_gross_salary()
-        deductions = self.__calc_monthly_deduction(gross_salary)
-        net_salary = gross_salary - deductions
-        return net_salary
 
     def get_bank_account(self, provided_id):
         if self.__id == provided_id:
@@ -90,28 +83,58 @@ class Employee:
     def is_valid_phone(phone):
         return phone.startswith("+20") and len(phone) == 12
 
+
+
+
+
+    # @classmethod
+    # def read_csv_data(cls, file_name):
+    #     with open(file_name, 'r') as file:
+    #         csv_reader = csv.DictReader(file)
+    #         for row in csv_reader:
+    #             name = row["name"]
+    #             age = int(row["age"])
+    #             job = row["job_title"]
+    #             id = row["id"]
+    #             phone = row["phone"]
+    #             bank_account = row["bank_account"]
+    #             hours_worked = int(row["hours_worked"])
+    #             hour_rate = int(row["hour_rate"])
+    #             cls(name, age, job, id, phone, bank_account, hours_worked, hour_rate)
+
+
+
+
+
+
+
+# this part i must desine befor i start code   now let's make method  in other  class for every function 
+
+
+class finace:  # الماليات 
+    # make it varable   best prac
+    #chanc without function
+
+
+    TAX_THRESHOLD = 10000
+    TAX_LOW = 0.1
+    TAX_HIGH = 0.3
+    health_insurance_cost = 100
+    retirement_contribution = 0.05
     @staticmethod
     def calc_tax(salary):
-        if salary < 30000:
-            return salary * 0.1
+        if salary < finace.TAX_THRESHOLD :
+            return salary * finace.TAX_LOW   #.> make it varable
         else:
-            return salary * 0.3
+            return salary * finace.TAX_HIGH
+        
 
-    @classmethod
-    def read_csv_data(cls, file_name):
-        with open(file_name, 'r') as file:
-            csv_reader = csv.DictReader(file)
-            for row in csv_reader:
-                name = row["name"]
-                age = int(row["age"])
-                job = row["job_title"]
-                id = row["id"]
-                phone = row["phone"]
-                bank_account = row["bank_account"]
-                hours_worked = int(row["hours_worked"])
-                hour_rate = int(row["hour_rate"])
-                cls(name, age, job, id, phone, bank_account, hours_worked, hour_rate)
 
-class py :
-    def lalala():
-        pass
+    def calc_net_salary(self):
+        tax = finace.calc_tax(gross_salary)
+        retirement_contribution =  finace.retirement_contribution* gross_salary
+        total_deduction = tax + finace.health_insurance_cost  + retirement_contribution
+        gross_salary = self.calc_gross_salary()
+        deductions = self.__calc_monthly_deduction(gross_salary)
+        net_salary = gross_salary - deductions
+        return net_salary
